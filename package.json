@@ -32,9 +32,9 @@
   "devDependencies": {
     "@angular-eslint/builder": "22.1.0",
     "@angular/animations": "22.1.4",
-    "@angular/build": "22.1.4",
-    "@angular/cdk": "22.1.2",
-    "@angular/cli": "22.1.4",
+    "@angular/build": "22.1.6",
+    "@angular/cdk": "22.1.4",
+    "@angular/cli": "22.1.6",
     "@angular/common": "22.1.4",
     "@angular/compiler": "22.1.4",
     "@angular/compiler-cli": "22.1.4",
