@@ -1,14 +1,10 @@
 import { isImmutableOnEdit } from '../../../utils/field-definition.utils';
+import { resolveContextPlaceholders } from '../../../utils/resolve-context-placeholders';
 import {
   buildInitialValues,
   toFormFields,
 } from '../../../utils/to-form-fields';
-import {
-  K8S_NAME_ERROR,
-  K8S_NAME_RE,
-  ResourceFieldNames,
-} from './create-resource-modal.consts';
-import { resolveContextPlaceholders } from '../../../utils/resolve-context-placeholders';
+import { ResourceFieldNames, K8S_NAME_ERROR, K8S_NAME_RE } from './resource-form-modal.consts';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -49,15 +45,15 @@ import {
 import { firstValueFrom } from 'rxjs';
 
 @Component({
-  selector: 'pm-create-resource-modal',
+  selector: 'pm-resource-form-modal',
   standalone: true,
   imports: [Dialog, ToolbarButton, Toolbar, DeclarativeForm, Bar, Title],
-  templateUrl: './create-resource-modal.component.html',
-  styleUrl: './create-resource-modal.component.scss',
+  templateUrl: './resource-form-modal.component.html',
+  styleUrl: './resource-form-modal.component.scss',
   encapsulation: ViewEncapsulation.ShadowDom,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CreateResourceModal {
+export class ResourceFormModal {
   context = input.required<ResourceNodeContext>();
   fields = input<PlatformMeshFieldDefinition[]>([]);
 
@@ -122,21 +118,18 @@ export class CreateResourceModal {
   private validateField(name: string, value: string): void {
     let error: string | null = null;
 
-    switch (name) {
-      case ResourceFieldNames.MetadataName:
-        if (!value) {
-          error = 'This field is required';
-        } else if (!K8S_NAME_RE.test(value)) {
-          error = K8S_NAME_ERROR;
-        }
-        break;
-      default: {
-        const field = this.formFields().find((f) => f.name === name);
-        if (field?.writeOnly && !value && this.isEditMode()) {
-          error = null;
-        } else if (field?.required && !value) {
-          error = 'This field is required';
-        }
+    if (name === ResourceFieldNames.MetadataName) {
+      if (!value) {
+        error = 'This field is required';
+      } else if (!K8S_NAME_RE.test(value)) {
+        error = K8S_NAME_ERROR;
+      }
+    } else {
+      const field = this.formFields().find((f) => f.name === name);
+      if (field?.writeOnly && !value && this.isEditMode()) {
+        error = null;
+      } else if (field?.required && !value) {
+        error = 'This field is required';
       }
     }
 
