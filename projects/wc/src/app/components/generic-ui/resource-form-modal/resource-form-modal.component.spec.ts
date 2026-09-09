@@ -402,7 +402,7 @@ describe('ResourceFormModalComponent', () => {
         {
           property: 'spec.oidc.clientSecret',
           label: 'Client secret',
-          uiSettings: { writeOnly: true },
+          writeOnly: true,
         },
       ];
       fixture.componentRef.setInput('fields', fieldsWithSecret);
@@ -421,7 +421,7 @@ describe('ResourceFormModalComponent', () => {
         {
           property: 'spec.oidc.clientSecret',
           label: 'Client secret',
-          uiSettings: { writeOnly: true },
+          writeOnly: true,
         },
       ];
       fixture.componentRef.setInput('fields', fieldsWithSecret);
@@ -474,7 +474,7 @@ describe('ResourceFormModalComponent', () => {
           property: 'spec.oidc.clientSecret',
           label: 'Client secret',
           required: true,
-          uiSettings: { writeOnly: true },
+          writeOnly: true,
         },
       ];
       fixture.componentRef.setInput('fields', fieldsWithSecret);

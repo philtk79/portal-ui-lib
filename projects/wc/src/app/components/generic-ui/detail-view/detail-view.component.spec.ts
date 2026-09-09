@@ -398,7 +398,7 @@ describe('DetailViewComponent', () => {
                 {
                   property: 'spec.oidc.clientSecret',
                   label: 'Client secret',
-                  uiSettings: { writeOnly: true },
+                  writeOnly: true,
                 },
               ],
             },
@@ -581,7 +581,7 @@ describe('DetailViewComponent', () => {
                 {
                   property: 'spec.oidc.clientSecret',
                   label: 'Client secret',
-                  uiSettings: { writeOnly: true },
+                  writeOnly: true,
                 },
               ],
             },
